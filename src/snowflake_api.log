@@ -1,0 +1,69 @@
+2025-02-05 16:12:51,556 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:12:51,556 - INFO - Extracted Snowflake account: app.snowflake.com
+2025-02-05 16:12:51,556 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 16:12:51,557 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 16:12:51,557 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 16:12:53,096 - WARNING - Certificate did not match expected hostname: app.snowflake.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:12:53,097 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(CertificateError("hostname 'app.snowflake.com.snowflakecomputing.com' doesn't match either of '*.prod3.us-west-2.snowflakecomputing.com', '*.us-west-2.snowflakecomputing.com', '*.global.snowflakecomputing.com', '*.snowflakecomputing.com', '*.prod3.us-west-2.aws.snowflakecomputing.com'"))': /session/v1/login-request?request_id=b4c43f19-5f96-4c68-a4c0-210eb48b7664&request_guid=7ebff81d-5677-4583-89aa-ed2d4031f7e2
+2025-02-05 16:12:54,237 - WARNING - Certificate did not match expected hostname: app.snowflake.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:12:56,392 - WARNING - Certificate did not match expected hostname: app.snowflake.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:12:56,393 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(CertificateError("hostname 'app.snowflake.com.snowflakecomputing.com' doesn't match either of '*.prod3.us-west-2.snowflakecomputing.com', '*.us-west-2.snowflakecomputing.com', '*.global.snowflakecomputing.com', '*.snowflakecomputing.com', '*.prod3.us-west-2.aws.snowflakecomputing.com'"))': /session/v1/login-request?request_id=d4576501-8ae1-409f-8721-babe36a085fb&request_guid=2e1089e2-d1b5-4be0-a78f-65b36cecf197
+2025-02-05 16:12:57,534 - WARNING - Certificate did not match expected hostname: app.snowflake.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:12:57,537 - ERROR - Snowflake Database Error: 250001: 250001: Could not connect to Snowflake backend after 2 attempt(s).Aborting
+Verify that the hostnames and port numbers in SYSTEM$ALLOWLIST are added to your firewall's allowed list.
+To further troubleshoot your connection you may reference the following article: https://docs.snowflake.com/en/user-guide/client-connectivity-troubleshooting/overview.
+2025-02-05 16:12:57,537 - ERROR - General API error: 500: Database connection issue.
+2025-02-05 16:14:47,345 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:14:47,345 - INFO - Extracted Snowflake account: fvb73919.us-east-1.snowflakecomputing.com
+2025-02-05 16:14:47,346 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 16:14:47,346 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 16:14:47,346 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 16:14:48,486 - WARNING - Certificate did not match expected hostname: fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:14:48,486 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(CertificateError("hostname 'fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com' doesn't match either of '*.prod3.us-west-2.snowflakecomputing.com', '*.us-west-2.snowflakecomputing.com', '*.global.snowflakecomputing.com', '*.snowflakecomputing.com', '*.prod3.us-west-2.aws.snowflakecomputing.com'"))': /session/v1/login-request?request_id=03af93b0-45e8-4d78-81de-b20333b0652d&request_guid=714f4288-794d-4de1-a2ee-9dccbb1a2f83
+2025-02-05 16:14:49,673 - WARNING - Certificate did not match expected hostname: fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:14:51,828 - WARNING - Certificate did not match expected hostname: fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:14:51,828 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(CertificateError("hostname 'fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com' doesn't match either of '*.prod3.us-west-2.snowflakecomputing.com', '*.us-west-2.snowflakecomputing.com', '*.global.snowflakecomputing.com', '*.snowflakecomputing.com', '*.prod3.us-west-2.aws.snowflakecomputing.com'"))': /session/v1/login-request?request_id=df91d040-732a-498b-889f-d25d28c515cb&request_guid=5ab10822-8c03-4790-acdd-2720187cf6f9
+2025-02-05 16:14:52,969 - WARNING - Certificate did not match expected hostname: fvb73919.us-east-1.snowflakecomputing.com.snowflakecomputing.com. Certificate: {'subject': ((('commonName', '*.prod3.us-west-2.snowflakecomputing.com'),),), 'subjectAltName': [('DNS', '*.prod3.us-west-2.snowflakecomputing.com'), ('DNS', '*.us-west-2.snowflakecomputing.com'), ('DNS', '*.global.snowflakecomputing.com'), ('DNS', '*.snowflakecomputing.com'), ('DNS', '*.prod3.us-west-2.aws.snowflakecomputing.com')]}
+2025-02-05 16:14:52,972 - ERROR - Snowflake Database Error: 250001: 250001: Could not connect to Snowflake backend after 2 attempt(s).Aborting
+Verify that the hostnames and port numbers in SYSTEM$ALLOWLIST are added to your firewall's allowed list.
+To further troubleshoot your connection you may reference the following article: https://docs.snowflake.com/en/user-guide/client-connectivity-troubleshooting/overview.
+2025-02-05 16:14:52,972 - ERROR - General API error: 500: Database connection issue.
+2025-02-05 16:19:06,716 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:19:06,716 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-05 16:19:06,717 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 16:19:06,717 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 16:19:06,717 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 16:19:08,000 - INFO - Successfully connected to Snowflake.
+2025-02-05 16:19:13,829 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-05 16:19:13,830 - INFO - closed
+2025-02-05 16:19:14,097 - INFO - No async queries seem to be running, deleting session
+2025-02-05 16:19:14,383 - INFO - Snowflake connection closed.
+2025-02-05 16:22:50,450 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:22:50,450 - ERROR - Error extracting Snowflake account: Invalid Snowflake URL format.
+2025-02-05 16:22:50,450 - ERROR - General API error: 400: Invalid Snowflake URL format.
+2025-02-05 16:23:00,081 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:23:00,081 - ERROR - Error extracting Snowflake account: Invalid Snowflake URL format.
+2025-02-05 16:23:00,081 - ERROR - General API error: 400: Invalid Snowflake URL format.
+2025-02-05 16:23:40,127 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:23:40,127 - ERROR - Error extracting Snowflake account: Invalid Snowflake URL format.
+2025-02-05 16:23:40,127 - ERROR - General API error: 400: Invalid Snowflake URL format.
+2025-02-05 16:24:18,940 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:24:18,940 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-05 16:24:18,940 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 16:24:18,941 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 16:24:18,941 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 16:24:21,905 - INFO - Successfully connected to Snowflake.
+2025-02-05 16:24:27,192 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-05 16:24:27,193 - INFO - closed
+2025-02-05 16:24:27,468 - INFO - No async queries seem to be running, deleting session
+2025-02-05 16:24:27,769 - INFO - Snowflake connection closed.
+2025-02-05 16:29:57,116 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 16:29:57,116 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-05 16:29:57,116 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 16:29:57,116 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 16:29:57,116 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 16:29:58,351 - INFO - Successfully connected to Snowflake.
+2025-02-05 16:30:04,257 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-05 16:30:04,258 - INFO - closed
+2025-02-05 16:30:04,538 - INFO - No async queries seem to be running, deleting session
+2025-02-05 16:30:04,836 - INFO - Snowflake connection closed.

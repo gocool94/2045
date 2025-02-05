@@ -1,0 +1,105 @@
+/* AdminPanel.css */
+.admin-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-height: 300px;
+  max-width: 90%;
+  margin: auto;
+}
+
+/* Auth Section */
+.auth-section {
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Buttons */
+.admin-button {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.admin-button:hover {
+  background-color: #545b62;
+}
+
+/* Table List Grid */
+.tables-grid {
+  margin-top: 20px;
+}
+
+.table-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.table-item {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 150px;
+  text-align: center;
+}
+
+.table-item.selected {
+  background-color: #0056b3;
+}
+
+.get-data {
+  margin-top: 15px;
+}
+
+/* Table Data */
+.table-data {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.table-data table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-data th, .table-data td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-data th {
+  background-color: #f4f4f4;
+}
