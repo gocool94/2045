@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Allocator.css";
 
 function Allocator() {
-  const [budget, setBudget] = useState(100000); // Example budget
+  const [budget, setBudget] = useState(100000); // Default budget
   const [data, setData] = useState([
     { id: 1, name: "Project A", amount: 20000, category: "Infrastructure", department: "Finance", status: "Ongoing" },
     { id: 2, name: "Project B", amount: 15000, category: "Tech", department: "IT", status: "Completed" },
@@ -45,7 +45,18 @@ function Allocator() {
   return (
     <div className="allocator-container">
       <h1>Allocator</h1>
-      <label className="budget-label">Total Budget Allocation: ${budget}</label>
+      
+      {/* Total Budget Allocation Input */}
+      <div className="budget-input">
+        <label htmlFor="budget">Total Budget Allocation:</label>
+        <input
+          type="number"
+          id="budget"
+          value={budget}
+          onChange={(e) => setBudget(e.target.value)}
+          placeholder="Enter budget"
+        />
+      </div>
 
       {/* Table Section */}
       <div className="table-container">

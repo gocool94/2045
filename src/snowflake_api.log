@@ -67,3 +67,5 @@ To further troubleshoot your connection you may reference the following article:
 2025-02-05 16:30:04,258 - INFO - closed
 2025-02-05 16:30:04,538 - INFO - No async queries seem to be running, deleting session
 2025-02-05 16:30:04,836 - INFO - Snowflake connection closed.
+2025-02-05 16:30:44,685 - ERROR - No active Snowflake session. Please authenticate first.
+2025-02-05 16:30:44,685 - ERROR - Unexpected error while fetching table data: 401: No active Snowflake session. Please authenticate first.
