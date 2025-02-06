@@ -6,25 +6,22 @@ function AdminPanel() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [tables, setTables] = useState([]);
-  const [selectedTable, setSelectedTable] = useState(null);
-  const [tableData, setTableData] = useState([]);
+  const [electoralData, setElectoralData] = useState([]);
+  const [isFetchingElectoral, setIsFetchingElectoral] = useState(false);
 
-  // Function to connect to Snowflake and fetch tables
+  // Function to connect to Snowflake
   const handleConnect = async () => {
     setMessage("");
     setError("");
-    setTables([]);
-    setTableData([]);
+    setIsLoading(true);
 
     try {
       const response = await fetch("http://localhost:8000/connect", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           link: link,
           username: username,
@@ -32,55 +29,43 @@ function AdminPanel() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
-      const data = await response.json();
-      if (data.tables) {
-        setTables(data.tables);
-        setMessage(`Connected! Retrieved ${data.tables.length} tables.`);
-        setIsAuthenticated(true); // Hide authentication section
-      } else {
-        setMessage("Connected successfully!");
-      }
+      setMessage("Connection Complete");
+      setIsAuthenticated(true);
     } catch (err) {
       setError("Failed to connect to FastAPI: " + err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Function to fetch data from selected table
-  const handleGetTableData = async () => {
-    if (!selectedTable) {
-      setError("Please select a table.");
-      return;
-    }
-
+  // Function to fetch electoral data
+  const handleGetElectoralData = async () => {
     setMessage("");
     setError("");
+    setIsFetchingElectoral(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/get_table_data?table=${selectedTable}`, {
+      const response = await fetch("http://localhost:8000/get_electoral_data", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
       const data = await response.json();
-      if (data.table_data) {
-        setTableData(data.table_data);
-        setMessage(`Data retrieved for table: ${selectedTable}`);
+      if (data.electoral_data) {
+        setElectoralData(data.electoral_data);
+        setMessage("Electoral data retrieved successfully.");
       } else {
-        setTableData([]);
-        setMessage("No data available for this table.");
+        setElectoralData([]);
+        setMessage("No electoral data available.");
       }
     } catch (err) {
-      setError("Failed to retrieve table data: " + err.message);
+      setError("Failed to retrieve electoral data: " + err.message);
+    } finally {
+      setIsFetchingElectoral(false);
     }
   };
 
@@ -125,49 +110,35 @@ function AdminPanel() {
             />
           </div>
 
-          <button className="admin-button" onClick={handleConnect}>
-            Connect to Snowflake
+          <button className="admin-button" onClick={handleConnect} disabled={isLoading}>
+            {isLoading ? "Connecting..." : "Connect to Snowflake"}
           </button>
+
+          {isLoading && <div className="loading-spinner"></div>}
         </div>
       ) : (
         <div className="tables-section">
           <p>{message}</p>
 
-          {/* Table List */}
-          {tables.length > 0 && (
-            <div className="tables-grid">
-              <h2>Select a Table:</h2>
-              <div className="table-list">
-                {tables.map((table, index) => (
-                  <div
-                    key={index}
-                    className={`table-item ${selectedTable === table ? "selected" : ""}`}
-                    onClick={() => setSelectedTable(table)}
-                  >
-                    {table}
-                  </div>
-                ))}
-              </div>
-              <button className="admin-button get-data" onClick={handleGetTableData}>
-                Get Data
-              </button>
-            </div>
-          )}
+          {/* Electoral Data Button */}
+          <button className="admin-button get-data" onClick={handleGetElectoralData} disabled={isFetchingElectoral}>
+            {isFetchingElectoral ? "Fetching Data..." : "Get Electoral Data"}
+          </button>
 
-          {/* Table Data */}
-          {tableData.length > 0 && (
+          {/* Electoral Data */}
+          {electoralData.length > 0 && (
             <div className="table-data">
-              <h2>Data for: {selectedTable}</h2>
+              <h2>Electoral Data</h2>
               <table>
                 <thead>
                   <tr>
-                    {Object.keys(tableData[0]).map((column, index) => (
+                    {Object.keys(electoralData[0]).map((column, index) => (
                       <th key={index}>{column}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {tableData.map((row, rowIndex) => (
+                  {electoralData.map((row, rowIndex) => (
                     <tr key={rowIndex}>
                       {Object.values(row).map((value, colIndex) => (
                         <td key={colIndex}>{value}</td>

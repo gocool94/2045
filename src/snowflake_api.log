@@ -69,3 +69,33 @@ To further troubleshoot your connection you may reference the following article:
 2025-02-05 16:30:04,836 - INFO - Snowflake connection closed.
 2025-02-05 16:30:44,685 - ERROR - No active Snowflake session. Please authenticate first.
 2025-02-05 16:30:44,685 - ERROR - Unexpected error while fetching table data: 401: No active Snowflake session. Please authenticate first.
+2025-02-05 18:23:31,364 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 18:23:31,365 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-05 18:23:31,367 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 18:23:31,369 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 18:23:31,370 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 18:23:33,191 - INFO - Successfully connected to Snowflake.
+2025-02-05 18:23:39,216 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-05 18:23:39,216 - INFO - closed
+2025-02-05 18:23:39,486 - INFO - No async queries seem to be running, deleting session
+2025-02-05 18:23:39,769 - INFO - Snowflake connection closed.
+2025-02-05 18:45:31,132 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-05 18:45:31,132 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-05 18:45:31,133 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-05 18:45:31,133 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-05 18:45:31,134 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-05 18:45:32,615 - INFO - Successfully connected to Snowflake.
+2025-02-05 18:45:38,371 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-05 18:45:38,371 - INFO - closed
+2025-02-05 18:45:38,657 - INFO - No async queries seem to be running, deleting session
+2025-02-05 18:45:38,955 - INFO - Snowflake connection closed.
+2025-02-06 18:02:34,346 - INFO - Received request to connect to Snowflake from user: gokul
+2025-02-06 18:02:34,346 - INFO - Extracted Snowflake account: fvb73919.us-east-1
+2025-02-06 18:02:34,346 - INFO - Snowflake Connector for Python Version: 3.13.1, Python Version: 3.13.1, Platform: Windows-11-10.0.26100-SP0
+2025-02-06 18:02:34,346 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-06 18:02:34,346 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-06 18:02:36,572 - INFO - Successfully connected to Snowflake.
+2025-02-06 18:02:42,874 - INFO - Retrieved 675 tables from Snowflake.
+2025-02-06 18:02:42,875 - INFO - closed
+2025-02-06 18:02:43,141 - INFO - No async queries seem to be running, deleting session
+2025-02-06 18:02:43,432 - INFO - Snowflake connection closed.

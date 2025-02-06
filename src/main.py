@@ -3,10 +3,11 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import snowflake.connector
-
-# Configure logging
+import json
+import pandas as pd
+import os
+# Configure logging to show logs in the console
 logging.basicConfig(
-    filename="snowflake_api.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
@@ -125,6 +126,67 @@ async def get_table_data(table: str = Query(..., description="Table name to fetc
     except Exception as e:
         logging.error(f"Unexpected error while fetching table data: {e}")
         raise HTTPException(status_code=500, detail="Error retrieving table data.")
+
+# Store Snowflake session details
+
+@app.get("/get_electoral_data")
+async def get_electoral_data():
+    """Fetches electoral data from Snowflake, saves it in the home directory, and returns JSON."""
+    try:
+        logging.info("🔹 Step 1: Checking session authentication")
+        if "account" not in session_data:
+            raise HTTPException(status_code=401, detail="No active Snowflake session. Please authenticate first.")
+
+        logging.info("🔹 Step 2: Connecting to Snowflake")
+
+        # Connect to Snowflake
+        conn = snowflake.connector.connect(
+            user=session_data["username"],
+            password=session_data["password"],
+            account=session_data["account"]
+        )
+        cursor = conn.cursor()
+
+        logging.info("🔹 Step 3: Executing Snowflake Query")
+        query = "SELECT * FROM DEV_DATA_ENRICHMENT.CANADA_ELECTORAL.ELECTORAL_DATA"
+        cursor.execute(query)
+        columns = [desc[0] for desc in cursor.description]
+        rows = cursor.fetchall()
+
+        logging.info(f"🔹 Step 4: Fetched {len(rows)} rows from Snowflake")
+
+        if not rows:
+            logging.warning("⚠️ Warning: No electoral data found in Snowflake.")
+            return {"electoral_data": [], "message": "No data available"}
+
+        # Convert to DataFrame
+        df = pd.DataFrame(rows, columns=columns)
+
+        # Save directory: Home directory
+        home_directory = os.path.expanduser("~")  # Gets the home directory
+        csv_file_path = os.path.join(home_directory, "electoral_data.csv")
+
+        # Save as CSV in the home directory
+        df.to_csv(csv_file_path, index=False)
+
+        logging.info(f"🔹 Step 5: CSV saved in home directory: {csv_file_path}")
+
+        # Convert to JSON format
+        json_output = df.to_json(orient="records", indent=4)
+
+        cursor.close()
+        conn.close()
+        logging.info("🔹 Step 6: Connection Closed Successfully")
+
+        return {"electoral_data": json.loads(json_output), "csv_file": csv_file_path}
+
+    except snowflake.connector.errors.ProgrammingError as pe:
+        logging.error(f"🚨 Snowflake SQL Error: {pe}")
+        raise HTTPException(status_code=400, detail="Invalid SQL query or table not found.")
+
+    except Exception as e:
+        logging.error(f"🚨 Unexpected error while fetching electoral data: {e}")
+        raise HTTPException(status_code=500, detail=f"Error retrieving electoral data: {str(e)}")
 
 # Run FastAPI
 if __name__ == "__main__":
