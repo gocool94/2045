@@ -17,7 +17,7 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Allow React frontend
+    allow_origins=["*"],  # Allow React frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -87,51 +87,10 @@ async def get_snowflake_tables(credentials: SnowflakeCredentials):
         logging.error(f"General API error: {e}")
         raise HTTPException(status_code=500, detail="Failed to connect to Snowflake.")
 
-@app.get("/get_table_data")
-async def get_table_data(table: str = Query(..., description="Table name to fetch data from")):
-    """Fetches data from the selected table in Snowflake."""
-    try:
-        if "account" not in session_data:
-            logging.error("No active Snowflake session. Please authenticate first.")
-            raise HTTPException(status_code=401, detail="No active Snowflake session. Please authenticate first.")
-
-        logging.info(f"Fetching data from table: {table}")
-
-        # Reconnect to Snowflake
-        conn = snowflake.connector.connect(
-            user=session_data["username"],
-            password=session_data["password"],
-            account=session_data["account"]
-        )
-        cursor = conn.cursor()
-
-        # Query table data (LIMIT to 10 rows for performance)
-        cursor.execute(f"SELECT * FROM {table} LIMIT 10")
-        columns = [desc[0] for desc in cursor.description]
-        rows = cursor.fetchall()
-
-        # Convert to JSON format
-        table_data = [dict(zip(columns, row)) for row in rows]
-
-        cursor.close()
-        conn.close()
-        logging.info(f"Retrieved {len(table_data)} rows from {table}.")
-
-        return {"table_data": table_data}
-
-    except snowflake.connector.errors.ProgrammingError as pe:
-        logging.error(f"Snowflake SQL Error: {pe}")
-        raise HTTPException(status_code=400, detail="Invalid SQL query or table not found.")
-    
-    except Exception as e:
-        logging.error(f"Unexpected error while fetching table data: {e}")
-        raise HTTPException(status_code=500, detail="Error retrieving table data.")
-
-# Store Snowflake session details
 
 @app.get("/get_electoral_data")
 async def get_electoral_data():
-    """Fetches electoral data from Snowflake, saves it in the home directory, and returns JSON."""
+    """Fetches electoral data from Snowflake, saves it in the current directory, and returns JSON."""
     try:
         logging.info("🔹 Step 1: Checking session authentication")
         if "account" not in session_data:
@@ -162,23 +121,27 @@ async def get_electoral_data():
         # Convert to DataFrame
         df = pd.DataFrame(rows, columns=columns)
 
-        # Save directory: Home directory
-        home_directory = os.path.expanduser("~")  # Gets the home directory
-        csv_file_path = os.path.join(home_directory, "electoral_data.csv")
+        # Save directory: Current directory where script is running
+        current_directory = os.getcwd()  # Get the current working directory
+        csv_file_path = os.path.join(current_directory, "electoral_data.csv")
+        json_file_path = os.path.join(current_directory, "electoral_data.json")
 
-        # Save as CSV in the home directory
+        # Save as CSV in the current directory
         df.to_csv(csv_file_path, index=False)
+        logging.info(f"🔹 CSV saved at: {csv_file_path}")
 
-        logging.info(f"🔹 Step 5: CSV saved in home directory: {csv_file_path}")
-
-        # Convert to JSON format
+        # Convert to JSON and save
         json_output = df.to_json(orient="records", indent=4)
+        with open(json_file_path, "w") as json_file:
+            json_file.write(json_output)
+
+        logging.info(f"🔹 JSON saved at: {json_file_path}")
 
         cursor.close()
         conn.close()
         logging.info("🔹 Step 6: Connection Closed Successfully")
 
-        return {"electoral_data": json.loads(json_output), "csv_file": csv_file_path}
+        return {"electoral_data": json.loads(json_output), "csv_file": csv_file_path, "json_file": json_file_path}
 
     except snowflake.connector.errors.ProgrammingError as pe:
         logging.error(f"🚨 Snowflake SQL Error: {pe}")
@@ -187,6 +150,7 @@ async def get_electoral_data():
     except Exception as e:
         logging.error(f"🚨 Unexpected error while fetching electoral data: {e}")
         raise HTTPException(status_code=500, detail=f"Error retrieving electoral data: {str(e)}")
+
 
 # Run FastAPI
 if __name__ == "__main__":
