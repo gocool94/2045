@@ -108,3 +108,35 @@
     margin-top: 15px;
   }
 }
+
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-label {
+  width: 200px;
+  font-weight: bold;
+}
+
+.filter-input {
+  width: 300px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.geo-button {
+  width: 100%;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.geo-button:hover {
+  background-color: darkblue;
+}
