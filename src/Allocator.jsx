@@ -3,35 +3,77 @@ import "./Allocator.css";
 
 function Allocator() {
   const [budget, setBudget] = useState(100000); // Default budget
+  const [prePostWright, setPrePostWright] = useState("Pre-Wright"); // Global toggle state
   const [data, setData] = useState([
-    { id: 1, name: "Project A", amount: 20000, category: "Infrastructure", department: "Finance", status: "Ongoing" },
-    { id: 2, name: "Project B", amount: 15000, category: "Tech", department: "IT", status: "Completed" },
-    { id: 3, name: "Project C", amount: 30000, category: "Healthcare", department: "Medical", status: "Pending" },
-    { id: 4, name: "Project D", amount: 25000, category: "Education", department: "Academics", status: "Ongoing" },
+    {
+      id: 1,
+      electoralDistrict: "Banff--Airdrie",
+      leadSharePercentage: 56.7,
+      electedParty: "Conservative",
+      population: 150000,
+      province: "Alberta",
+      adjust: 0,
+      budgetAllocation: 20000,
+    },
+    {
+      id: 2,
+      electoralDistrict: "Calgary Skyview",
+      leadSharePercentage: 42.3,
+      electedParty: "Liberal",
+      population: 200000,
+      province: "Alberta",
+      adjust: 0,
+      budgetAllocation: 15000,
+    },
+    {
+      id: 3,
+      electoralDistrict: "Vancouver East",
+      leadSharePercentage: 48.5,
+      electedParty: "NDP",
+      population: 180000,
+      province: "British Columbia",
+      adjust: 0,
+      budgetAllocation: 30000,
+    },
+    {
+      id: 4,
+      electoralDistrict: "Toronto Centre",
+      leadSharePercentage: 52.1,
+      electedParty: "Liberal",
+      population: 250000,
+      province: "Ontario",
+      adjust: 0,
+      budgetAllocation: 25000,
+    },
   ]);
 
   const [selectedRows, setSelectedRows] = useState([]);
 
-  // Select all rows by default
   useEffect(() => {
-    setSelectedRows(data.map(row => row.id));
+    setSelectedRows(data.map((row) => row.id));
   }, [data]);
 
-  const handleCheckboxChange = (id) => {
-    setSelectedRows((prevSelectedRows) =>
-      prevSelectedRows.includes(id)
-        ? prevSelectedRows.filter((rowId) => rowId !== id)
-        : [...prevSelectedRows, id]
-    );
+  const togglePrePostWright = () => {
+    setPrePostWright(prePostWright === "Pre-Wright" ? "Post-Wright" : "Pre-Wright");
   };
 
-  // Function to export selected data to CSV
   const exportToCSV = () => {
-    const selectedData = data.filter(row => selectedRows.includes(row.id));
+    const selectedData = data.filter((row) => selectedRows.includes(row.id));
     const csvContent = [
-      ["Project Name", "Allocated Amount", "Category", "Department", "Status"],
-      ...selectedData.map(row => [row.name, `$${row.amount}`, row.category, row.department, row.status])
-    ].map(e => e.join(",")).join("\n");
+      ["Electoral District", "Lead Share %", "Elected Party", "Population", "Province", "Adjust", "Budget Allocation", "Pre/Post-Wright"],
+      ...selectedData.map((row) => [
+        row.electoralDistrict,
+        row.leadSharePercentage + "%",
+        row.electedParty,
+        row.population.toLocaleString(),
+        row.province,
+        row.adjust,
+        `$${row.budgetAllocation.toLocaleString()}`,
+        prePostWright,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
@@ -44,31 +86,49 @@ function Allocator() {
 
   return (
     <div className="allocator-container">
-      <h1>Allocator</h1>
-      
-      {/* Total Budget Allocation Input */}
-      <div className="budget-input">
-        <label htmlFor="budget">Total Budget Allocation:</label>
-        <input
-          type="number"
-          id="budget"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-          placeholder="Enter budget"
-        />
+      <h1 className="title">Budget Allocator</h1>
+
+      {/* Budget & Toggle Section */}
+      <div className="budget-toggle-container">
+        <div className="budget-input">
+          <label htmlFor="budget" className="budget-label">Total Budget Allocation:</label>
+          <input
+            type="number"
+            id="budget"
+            className="budget-field"
+            value={budget}
+            onChange={(e) => setBudget(Number(e.target.value))}
+            placeholder="Enter budget"
+          />
+        </div>
+
+        {/* Global Toggle for Pre-Wright / Post-Wright */}
+        <div className="toggle-container">
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={prePostWright === "Post-Wright"}
+              onChange={togglePrePostWright}
+            />
+            <span className="slider round"></span>
+          </label>
+          <span className="toggle-text">{prePostWright}</span>
+        </div>
       </div>
 
       {/* Table Section */}
       <div className="table-container">
-        <table>
+        <table className="budget-table">
           <thead>
             <tr>
               <th>Select</th>
-              <th>Project Name</th>
-              <th>Allocated Amount</th>
-              <th>Category</th>
-              <th>Department</th>
-              <th>Status</th>
+              <th>Electoral District</th>
+              <th>Lead Share %</th>
+              <th>Elected Party</th>
+              <th>Population</th>
+              <th>Province</th>
+              <th>Adjust</th>
+              <th>Budget Allocation</th>
             </tr>
           </thead>
           <tbody>
@@ -78,21 +138,29 @@ function Allocator() {
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(row.id)}
-                    onChange={() => handleCheckboxChange(row.id)}
+                    onChange={() => setSelectedRows((prev) =>
+                      prev.includes(row.id) ? prev.filter((id) => id !== row.id) : [...prev, row.id]
+                    )}
                   />
                 </td>
-                <td>{row.name}</td>
-                <td>${row.amount.toLocaleString()}</td>
-                <td>{row.category}</td>
-                <td>{row.department}</td>
-                <td>{row.status}</td>
+                <td>{row.electoralDistrict}</td>
+                <td>{row.leadSharePercentage}%</td>
+                <td>{row.electedParty}</td>
+                <td>{row.population.toLocaleString()}</td>
+                <td>{row.province}</td>
+                <td>
+                  <input type="number" className="adjust-input" value={row.adjust} />
+                </td>
+                <td>
+                  <input type="number" className="budget-allocation" value={row.budgetAllocation} />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <button className="allocate-button" onClick={exportToCSV}>
+      <button className="export-button" onClick={exportToCSV}>
         Export to CSV
       </button>
     </div>

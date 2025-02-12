@@ -12,6 +12,7 @@ df = pd.read_csv(csv_file_path)
 # 📌 Convert WKT (Well-Known Text) to Geometry
 df["geometry"] = df["the_geom"].apply(wkt.loads)
 
+
 # 📌 Convert to GeoDataFrame
 gdf = gpd.GeoDataFrame(df, geometry="geometry", crs="EPSG:4326")  # Ensure WGS84 projection
 

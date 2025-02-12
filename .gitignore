@@ -10,6 +10,7 @@
 
 # production
 /build
+public/formatted_electoral_data.json
 
 # misc
 .DS_Store

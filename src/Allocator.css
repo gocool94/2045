@@ -1,12 +1,18 @@
-/* Allocator Container */
 .allocator-container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 90%;
+  max-width: 1200px;
   margin: auto;
+  padding: 20px;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
 }
 
 /* Budget Input */
@@ -14,67 +20,154 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.budget-label {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-right: 10px;
 }
 
-.budget-input input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 150px;
-  text-align: center;
-}
-
-/* Table Container */
-.table-container {
-  margin-top: 20px;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-th, td {
-  border: 1px solid #ddd;
+.budget-field {
+  width: 220px;
   padding: 10px;
-  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-th {
-  background-color: #f4f4f4;
+/* Table Section */
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.budget-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* Expands to fit content */
+  font-size: 16px;
+}
+
+.budget-table th,
+.budget-table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.budget-table th {
+  background: #007bff;
+  color: white;
   font-weight: bold;
 }
 
-/* Checkbox */
-td input[type="checkbox"] {
-  transform: scale(1.2);
+.budget-table tbody tr:nth-child(even) {
+  background: #f2f2f2;
 }
 
-/* Highlight selected row in blue */
 .selected-row {
-  background-color: #cce5ff;
+  background: #cce5ff !important;
+}
+
+/* Input Fields */
+.adjust-input,
+.budget-allocation {
+  width: 120px;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+/* Responsive Table */
+@media (max-width: 992px) {
+  .budget-table {
+    font-size: 14px;
+  }
+  .adjust-input,
+  .budget-allocation {
+    width: 100px;
+  }
 }
 
 /* Export Button */
-.allocate-button {
-  background-color: #007bff;
+.export-button {
+  background: #28a745;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s ease;
-  margin-top: 20px;
+  margin-top: 15px;
+  transition: background 0.3s ease;
 }
 
-.allocate-button:hover {
-  background-color: #0056b3;
+.export-button:hover {
+  background: #218838;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-left: 10px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-text {
+  margin-left: 8px;
+  font-weight: bold;
+  font-size: 14px;
 }
